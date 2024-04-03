@@ -116,10 +116,16 @@ class NumStringGameApp(tk.Tk):
             self.end_game()
             return
 
-        # Simple strategy for demonstration
-        best_move = 0  # Example: Always picks the first number
+        # Select strategy based on a condition or user input. For now, it's random selection for illustration.
+        strategy = choice(['first', 'random'])
+        if strategy == 'first':
+            best_move = 0  # Always picks the first number
+        elif strategy == 'random':
+            best_move = randint(0, len(self.num_string) - 1)  # Picks a random number
+
+        # Apply the move
         removed_number = int(self.num_string[best_move])
-        self.num_string = self.num_string[1:]  # Remove the first number
+        self.num_string = self.num_string[:best_move] + self.num_string[best_move + 1:]
 
         if removed_number % 2 == 0:
             self.computer_score -= removed_number * 2
